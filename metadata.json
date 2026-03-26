@@ -1,0 +1,5 @@
+{
+  "name": "Apple Style Profile Card",
+  "description": "A sleek, Apple-inspired profile and business card generator with local storage persistence.",
+  "requestFramePermissions": []
+}
