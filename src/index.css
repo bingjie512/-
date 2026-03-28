@@ -78,6 +78,14 @@ body {
     box-shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
 }
 
+/* Hex-based color utilities for html2canvas compatibility */
+.text-card-emerald_080 { color: #34d399; }
+.text-card-zinc-300_080 { color: #d4d4d8; }
+.text-card-zinc-400_080 { color: #a1a1aa; }
+.text-card-zinc-500_080 { color: #71717a; }
+.bg-card-zinc-800_080 { background-color: #27272a; }
+.bg-card-zinc-900_080 { background-color: #18181b; }
+
 /* Business Card Styles - Modern Horizontal Profile Card */
 .business-card_080 {
     position: relative;

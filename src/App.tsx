@@ -755,7 +755,7 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
             <div className="card-info-section_080">
               <div>
                 <h2 className="text-4xl font-black text-white tracking-tight leading-tight mb-1">{formData_080.name || '您的姓名'}</h2>
-                <p className="text-lg text-emerald-400 font-bold tracking-[0.2em] uppercase">{formData_080.title || '学生'}</p>
+                <p className="text-lg text-card-emerald_080 font-bold tracking-[0.2em] uppercase">{formData_080.title || '学生'}</p>
               </div>
 
               <div className="info-grid_080">
@@ -786,10 +786,10 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
               </div>
 
               <div className="card-footer_080 mt-4">
-                <p className="text-sm text-zinc-400 italic mb-4">"{formData_080.signature || '这个人很酷，什么都没留下...'}"</p>
+                <p className="text-sm text-card-zinc-400_080 italic mb-4">"{formData_080.signature || '这个人很酷，什么都没留下...'}"</p>
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Loyalty Level</span>
-                  <span className="text-[10px] font-bold text-zinc-300">{formData_080.loyalty}%</span>
+                  <span className="text-[10px] font-bold text-card-zinc-500_080 uppercase tracking-widest">Loyalty Level</span>
+                  <span className="text-[10px] font-bold text-card-zinc-300_080">{formData_080.loyalty}%</span>
                 </div>
                 <div className="loyalty-bar_080">
                   <div className="loyalty-fill_080" style={{ width: `${formData_080.loyalty}%` }} />
