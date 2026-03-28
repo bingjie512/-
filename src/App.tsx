@@ -204,11 +204,11 @@ function LandingPage({ onLogin, onRegister }: LandingPageProps) {
       <p className="text-xl text-zinc-500 max-w-2xl mx-auto mb-10 leading-relaxed">
         极简设计，极致体验。只需几秒钟，即可生成一张极具设计感的个人数字名片，随时随地分享你的专业形象。
       </p>
-      <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <button onClick={onLogin} className="bg-zinc-900 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-zinc-200">
-          登录 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+      <div className="flex flex-col sm:flex-row justify-center gap-6">
+        <button onClick={onLogin} className="bg-zinc-900 text-white px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-zinc-200">
+          登录 <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
         </button>
-        <button onClick={onRegister} className="bg-white text-zinc-900 border border-zinc-200 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-50 transition-all">
+        <button onClick={onRegister} className="bg-white text-zinc-900 border border-zinc-200 px-10 py-5 rounded-2xl text-xl font-semibold hover:bg-zinc-50 transition-all">
           注册
         </button>
       </div>
@@ -255,52 +255,52 @@ function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
       exit={{ opacity: 0, scale: 0.95 }}
       className="container_080 max-w-md"
     >
-      <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold tracking-tight text-zinc-900">欢迎回来</h2>
-        <p className="text-zinc-500 mt-2">请输入你的学号和密码登录</p>
+      <div className="text-center mb-10">
+        <h2 className="text-4xl font-bold tracking-tight text-zinc-900">欢迎回来</h2>
+        <p className="text-lg text-zinc-500 mt-3">请输入你的学号和密码登录</p>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-8">
         {error && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-2"
+            className="bg-red-50 border border-red-100 text-red-600 px-5 py-4 rounded-xl text-base font-medium flex items-center gap-2"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
+            <div className="w-2 h-2 rounded-full bg-red-600" />
             {error}
           </motion.div>
         )}
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-700 flex items-center gap-2">
-            <User className="w-4 h-4" /> 学号
+        <div className="space-y-3">
+          <label className="text-base font-semibold text-zinc-700 flex items-center gap-2">
+            <User className="w-5 h-5" /> 学号
           </label>
           <input 
             type="text" 
             required 
             value={id}
             onChange={(e) => { setId(e.target.value); setError(''); }}
-            className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all"
+            className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all text-lg"
             placeholder="请输入学号"
           />
         </div>
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-700 flex items-center gap-2">
-            <Lock className="w-4 h-4" /> 密码
+        <div className="space-y-3">
+          <label className="text-base font-semibold text-zinc-700 flex items-center gap-2">
+            <Lock className="w-5 h-5" /> 密码
           </label>
           <input 
             type="password" 
             required 
             value={pass}
             onChange={(e) => { setPass(e.target.value); setError(''); }}
-            className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all"
+            className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all text-lg"
             placeholder="请输入密码"
           />
         </div>
-        <button type="submit" className="w-full bg-zinc-900 text-white py-4 rounded-xl font-bold hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-200">
+        <button type="submit" className="w-full bg-zinc-900 text-white py-5 rounded-xl font-bold text-lg hover:bg-zinc-800 transition-all shadow-lg shadow-zinc-200">
           登录
         </button>
       </form>
-      <p className="text-center mt-6 text-sm text-zinc-500">
+      <p className="text-center mt-8 text-base text-zinc-500">
         还没有账号？ <button onClick={onGoRegister} className="text-zinc-900 font-bold hover:underline">立即注册</button>
       </p>
     </motion.div>
@@ -434,96 +434,96 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
       exit={{ opacity: 0, y: -20 }}
       className="container_080 max-w-2xl"
     >
-      <div className="mb-10">
-        <h2 className="text-3xl font-bold tracking-tight">完善个人资料</h2>
-        <p className="text-zinc-500 mt-2">这些信息将展示在你的名片上</p>
+      <div className="mb-12">
+        <h2 className="text-4xl font-bold tracking-tight">完善个人资料</h2>
+        <p className="text-xl text-zinc-500 mt-3">这些信息将展示在你的名片上</p>
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-8">
+      <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-10">
         {/* Avatar Upload */}
-        <div className="flex items-center gap-6 p-6 bg-zinc-50 rounded-3xl border border-zinc-100">
-          <div className="relative w-24 h-24 bg-zinc-200 rounded-2xl overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
+        <div className="flex items-center gap-8 p-8 bg-zinc-50 rounded-3xl border border-zinc-100">
+          <div className="relative w-32 h-32 bg-zinc-200 rounded-2xl overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
             {formData.avatar ? (
               <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-zinc-400">
-                <User className="w-10 h-10" />
+                <User className="w-12 h-12" />
               </div>
             )}
           </div>
           <div className="flex-1">
-            <h4 className="font-bold text-zinc-900 mb-1">个人头像</h4>
-            <p className="text-xs text-zinc-400 mb-3">建议上传正方形照片，支持 JPG, PNG 格式</p>
-            <label className="inline-block bg-white border border-zinc-200 px-4 py-2 rounded-xl text-sm font-semibold cursor-pointer hover:bg-zinc-50 transition-colors">
+            <h4 className="text-xl font-bold text-zinc-900 mb-2">个人头像</h4>
+            <p className="text-sm text-zinc-400 mb-4">建议上传正方形照片，支持 JPG, PNG 格式</p>
+            <label className="inline-block bg-white border border-zinc-200 px-6 py-3 rounded-xl text-base font-semibold cursor-pointer hover:bg-zinc-50 transition-colors">
               选择照片
               <input type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
             </label>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700">真实姓名</label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="space-y-3">
+            <label className="text-base font-semibold text-zinc-700">真实姓名</label>
             <input 
               type="text" required value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none"
+              className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="你的名字"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700">电子邮箱</label>
+          <div className="space-y-3">
+            <label className="text-base font-semibold text-zinc-700">电子邮箱</label>
             <input 
               type="email" required value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none"
+              className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="example@mail.com"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700">年龄</label>
+          <div className="space-y-3">
+            <label className="text-base font-semibold text-zinc-700">年龄</label>
             <input 
               type="number" required value={formData.age}
               onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none"
+              className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700">班级</label>
+          <div className="space-y-3">
+            <label className="text-base font-semibold text-zinc-700">班级</label>
             <input 
               type="text" required value={formData.classGroup}
               onChange={(e) => setFormData({ ...formData, classGroup: e.target.value })}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none"
+              className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="如：计算机2201"
             />
           </div>
-          <div className="space-y-2">
-            <label className="text-sm font-semibold text-zinc-700">性别</label>
-            <div className="flex gap-4 py-3">
+          <div className="space-y-3">
+            <label className="text-base font-semibold text-zinc-700">性别</label>
+            <div className="flex gap-6 py-4">
               {['男', '女'].map(g => (
-                <label key={g} className="flex items-center gap-2 cursor-pointer">
+                <label key={g} className="flex items-center gap-3 cursor-pointer">
                   <input 
                     type="radio" name="gender" value={g} checked={formData.gender === g}
                     onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                    className="w-4 h-4 accent-zinc-900"
+                    className="w-5 h-5 accent-zinc-900"
                   />
-                  <span className="text-sm font-medium">{g}</span>
+                  <span className="text-lg font-medium">{g}</span>
                 </label>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="space-y-2">
-          <label className="text-sm font-semibold text-zinc-700">个性签名</label>
+        <div className="space-y-3">
+          <label className="text-base font-semibold text-zinc-700">个性签名</label>
           <textarea 
             rows={3} value={formData.signature}
             onChange={(e) => setFormData({ ...formData, signature: e.target.value })}
-            className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none resize-none"
+            className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none resize-none text-lg"
             placeholder="一句话介绍你自己..."
           />
         </div>
 
-        <button type="submit" className="w-full bg-zinc-900 text-white py-4 rounded-2xl font-bold hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200">
+        <button type="submit" className="w-full bg-zinc-900 text-white py-5 rounded-2xl font-bold text-xl hover:bg-zinc-800 transition-all shadow-xl shadow-zinc-200">
           保存并进入工作台
         </button>
       </form>
@@ -672,45 +672,45 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
               />
             </div>
             <div className="card-info-section_080">
-              <div className="space-y-6">
+            <div className="space-y-10">
                 <div>
-                  <h2 className="text-2xl font-bold text-white tracking-tight">{formData.name || '姓名'}</h2>
-                  <p className="text-sm text-[#A1A1AA] font-medium tracking-wide uppercase mt-1">{formData.title || '职称'}</p>
+                  <h2 className="text-6xl font-bold text-white tracking-tight leading-tight">{formData.name || '姓名'}</h2>
+                  <p className="text-2xl text-zinc-400 font-medium tracking-widest uppercase mt-3">{formData.title || '职称'}</p>
                 </div>
 
                 <div className="info-grid_080">
                   <div className="info-item_080">
-                    <span className="info-label_080">年龄</span>
+                    <span className="info-label_080">年龄 / AGE</span>
                     <span className="info-value_080">{formData.age || 'N/A'}</span>
                   </div>
                   <div className="info-item_080">
-                    <span className="info-label_080">性别</span>
+                    <span className="info-label_080">性别 / GENDER</span>
                     <span className="info-value_080">{formData.gender}</span>
                   </div>
                   <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">班级</span>
+                    <span className="info-label_080">班级 / CLASS</span>
                     <span className="info-value_080">{formData.classGroup || '未填写'}</span>
                   </div>
                   <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">学历</span>
+                    <span className="info-label_080">学历 / EDUCATION</span>
                     <span className="info-value_080">{formData.education}</span>
                   </div>
                   <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">爱好</span>
+                    <span className="info-label_080">爱好 / HOBBIES</span>
                     <span className="info-value_080">{formData.hobbies || '无'}</span>
                   </div>
                   <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">邮箱</span>
-                    <span className="info-value_080 text-[#F4F4F5]">{formData.email || 'example@mail.com'}</span>
+                    <span className="info-label_080">邮箱 / EMAIL</span>
+                    <span className="info-value_080 text-zinc-100">{formData.email || 'example@mail.com'}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="card-footer_080">
-                <p className="text-[#A1A1AA] italic mb-3">"{formData.signature || '这个人很酷，什么都没留下...'}"</p>
-                <div className="flex justify-between items-center mb-1">
-                  <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-widest">Loyalty Level</span>
-                  <span className="text-[10px] font-bold text-[#D4D4D8]">{formData.loyalty}%</span>
+              <div className="card-footer_080 mt-12">
+                <p className="text-2xl text-zinc-400 italic mb-8 leading-relaxed">"{formData.signature || '这个人很酷，什么都没留下...'}"</p>
+                <div className="flex justify-between items-center mb-3">
+                  <span className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Loyalty Level</span>
+                  <span className="text-sm font-bold text-zinc-300">{formData.loyalty}%</span>
                 </div>
                 <div className="loyalty-bar_080">
                   <div className="loyalty-fill_080" style={{ width: `${formData.loyalty}%` }} />

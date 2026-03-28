@@ -59,15 +59,15 @@ body {
 
 .container_080 {
     width: 100%;
-    max-width: 840px;
-    background: rgba(255, 255, 255, 0.86);
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(148, 163, 184, 0.22);
-    border-radius: 24px;
+    border-radius: 32px;
     box-shadow: var(--shadow-soft_080);
-    padding: 32px 40px 36px 40px;
+    padding: 48px 56px;
     box-sizing: border-box;
-    backdrop-filter: blur(26px);
-    -webkit-backdrop-filter: blur(26px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
 }
 
 .form-section_080 {
@@ -81,21 +81,16 @@ body {
 /* Business Card Styles - ID Card Layout v2 */
 .business-card_080 {
     position: relative;
-    background:
-        radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.22), transparent 55%),
-        radial-gradient(circle at 110% 120%, rgba(129, 230, 217, 0.16), transparent 60%),
-        linear-gradient(135deg, #020617 0%, #0f172a 45%, #020617 100%);
-    border-radius: 28px;
-    padding: 2.4em 2.6em;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 40px;
+    padding: 4em 5em;
     display: flex;
-    gap: 2.2em;
-    align-items: stretch;
-    font-size: 15px;
+    gap: 5em;
+    align-items: center;
+    font-size: 24px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.52);
-    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.45);
-    backdrop-filter: blur(26px) saturate(140%);
-    -webkit-backdrop-filter: blur(26px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 120px rgba(15, 23, 42, 0.6);
 }
 
 .business-card_080::before {
@@ -139,16 +134,16 @@ body {
 
 .info-grid_080 {
     display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-    gap: 1.2em;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
 }
 
 .info-item_080 {
     display: flex;
-    flex-direction: row;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: flex-start;
     min-width: 0;
-    gap: 0.35em;
+    gap: 0.5em;
 }
 
 .info-item-full-width_080 {
@@ -156,17 +151,17 @@ body {
 }
 
 .info-label_080 {
-    font-size: 0.9em;
-    font-weight: 600;
-    color: rgba(248, 250, 252, 0.96);
-    margin-right: 0.5em;
-    flex-shrink: 0;
+    font-size: 0.75em;
+    font-weight: 800;
+    color: #94A3B8;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
 }
 
 .info-value_080 {
-    font-size: 0.9em;
-    font-weight: 400;
-    color: rgba(226, 232, 240, 0.88);
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #FFFFFF;
     white-space: normal;
     word-break: break-word;
 }
