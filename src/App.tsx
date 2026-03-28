@@ -555,37 +555,76 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
   const [isDownloading_080, setIsDownloading_080] = useState(false);
   const [downloadError_080, setDownloadError_080] = useState<string | null>(null);
 
+  const handleReset_080 = () => {
+    if (window.confirm("确定要重置所有个人信息吗？此操作不可撤销。")) {
+      const emptyProfile_080: UserProfile_080 = {
+        avatar: '',
+        name: '',
+        email: '',
+        age: '',
+        gender: '男',
+        classGroup: '',
+        hobbies: '',
+        title: '学生',
+        education: '本科',
+        signature: '',
+        loyalty: 50
+      };
+      setFormData_080(emptyProfile_080);
+      onSave(emptyProfile_080);
+    }
+  };
+
   const handleDownload_080 = async () => {
-    if (cardRef.current && !isDownloading_080) {
-      setIsDownloading_080(true);
-      setDownloadError_080(null);
-      try {
-        // Give a small delay to ensure all styles are applied
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        const canvas_080 = await html2canvas(cardRef.current, { 
-          useCORS: true,
-          allowTaint: false,
-          scale: 2,
-          backgroundColor: '#1e293b', // Match the card background
-          logging: true,
-          width: cardRef.current.offsetWidth,
-          height: cardRef.current.offsetHeight
-        });
-        
-        const dataUrl_080 = canvas_080.toDataURL('image/png');
-        const link_080 = document.createElement('a');
-        link_080.href = dataUrl_080;
-        link_080.download = `名片_${formData_080.name || '未命名'}.png`;
-        document.body.appendChild(link_080);
-        link_080.click();
-        document.body.removeChild(link_080);
-      } catch (err_080) {
-        console.error("Download failed:", err_080);
-        setDownloadError_080("生成图片失败，请稍后重试。");
-      } finally {
-        setIsDownloading_080(false);
-      }
+    if (!cardRef.current) {
+      console.error("cardRef.current is null");
+      setDownloadError_080("预览区域未就绪，请刷新页面重试。");
+      return;
+    }
+
+    if (isDownloading_080) return;
+
+    setIsDownloading_080(true);
+    setDownloadError_080(null);
+    
+    try {
+      // Ensure images are loaded and styles are applied
+      await new Promise(resolve => setTimeout(resolve, 800));
+      
+      const element_080 = cardRef.current;
+      
+      // Use a more robust configuration for html2canvas
+      const canvas_080 = await html2canvas(element_080, { 
+        useCORS: true,
+        allowTaint: false,
+        scale: 3, // Higher scale for better quality
+        backgroundColor: '#1e293b',
+        logging: true,
+        imageTimeout: 20000,
+        removeContainer: true,
+        onclone: (clonedDoc_080) => {
+          // Ensure the cloned element is visible and has correct dimensions
+          const clonedElement_080 = clonedDoc_080.querySelector('.business-card_080') as HTMLElement;
+          if (clonedElement_080) {
+            clonedElement_080.style.overflow = 'visible';
+            clonedElement_080.style.boxShadow = 'none';
+            clonedElement_080.style.transform = 'none';
+          }
+        }
+      });
+      
+      const dataUrl_080 = canvas_080.toDataURL('image/png', 1.0);
+      const link_080 = document.createElement('a');
+      link_080.href = dataUrl_080;
+      link_080.download = `名片_${formData_080.name || '未命名'}_080.png`;
+      document.body.appendChild(link_080);
+      link_080.click();
+      document.body.removeChild(link_080);
+    } catch (err_080) {
+      console.error("Download failed details:", err_080);
+      setDownloadError_080("生成图片失败。建议：1.检查网络 2.尝试更换头像链接 3.确保浏览器未禁用Canvas");
+    } finally {
+      setIsDownloading_080(false);
     }
   };
 
@@ -659,24 +698,32 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
                 />
               </div>
 
-              <div className="flex gap-4 pt-4">
-                <button 
-                  type="button" onClick={() => onSave(formData_080)}
-                  className="flex-1 bg-zinc-900 text-white py-4 rounded-2xl font-bold hover:bg-zinc-800 transition-all"
-                >
-                  更新档案
-                </button>
+              <div className="flex flex-col gap-3 pt-4">
+                <div className="flex gap-4">
+                  <button 
+                    type="button" onClick={handleReset_080}
+                    className="flex-1 bg-zinc-100 text-zinc-900 py-4 rounded-2xl font-bold hover:bg-zinc-200 transition-all"
+                  >
+                    重置档案
+                  </button>
+                  <button 
+                    type="button" onClick={() => onSave(formData_080)}
+                    className="flex-1 bg-zinc-900 text-white py-4 rounded-2xl font-bold hover:bg-zinc-800 transition-all"
+                  >
+                    保存修改
+                  </button>
+                </div>
                 <button 
                   type="button" onClick={handleDownload_080}
                   disabled={isDownloading_080}
-                  className="flex-1 bg-white border border-zinc-200 text-zinc-900 py-4 rounded-2xl font-bold hover:bg-zinc-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                  className="w-full bg-emerald-500 text-white py-4 rounded-2xl font-bold hover:bg-emerald-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
                   {isDownloading_080 ? (
-                    <div className="w-5 h-5 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <Download className="w-5 h-5" />
                   )}
-                  {isDownloading_080 ? '生成中...' : '下载名片'}
+                  {isDownloading_080 ? '正在生成高清图片...' : '下载名片 (PNG)'}
                 </button>
               </div>
               {downloadError_080 && (
