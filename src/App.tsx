@@ -17,7 +17,8 @@ import {
   ArrowRight,
   ShieldCheck,
   Zap,
-  Layout
+  Layout,
+  Upload
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import html2canvas from 'html2canvas';
@@ -598,7 +599,7 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
         useCORS: true,
         allowTaint: false,
         scale: 3, // Higher scale for better quality
-        backgroundColor: '#1e293b',
+        backgroundColor: null, // Allow gradient to show
         logging: true,
         imageTimeout: 20000,
         removeContainer: true,
@@ -633,6 +634,17 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
     setFormData_080(prev_080 => ({ ...prev_080, [id]: value }));
   };
 
+  const handleFileChange_080 = (e_080: React.ChangeEvent<HTMLInputElement>) => {
+    const file_080 = e_080.target.files?.[0];
+    if (file_080) {
+      const reader_080 = new FileReader();
+      reader_080.onloadend = () => {
+        setFormData_080(prev_080 => ({ ...prev_080, avatar: reader_080.result as string }));
+      };
+      reader_080.readAsDataURL(file_080);
+    }
+  };
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -655,6 +667,16 @@ function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080)
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">姓名</label>
                   <input id="name" type="text" value={formData_080.name} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">头像链接</label>
+                  <div className="flex gap-2">
+                    <input id="avatar" type="text" value={formData_080.avatar} onChange={handleInputChange_080} className="flex-1 px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" placeholder="https://..." />
+                    <label className="cursor-pointer bg-zinc-100 px-4 py-3 rounded-xl border border-zinc-200 hover:bg-zinc-200 transition-all flex items-center justify-center">
+                      <Upload className="w-4 h-4 text-zinc-600" />
+                      <input type="file" className="hidden" accept="image/*" onChange={handleFileChange_080} />
+                    </label>
+                  </div>
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">职称</label>

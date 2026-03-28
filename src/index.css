@@ -89,7 +89,7 @@ body {
 /* Business Card Styles - Modern Horizontal Profile Card */
 .business-card_080 {
     position: relative;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e1b4b 100%);
     border-radius: 32px;
     padding: 2.5em 3em;
     display: flex;
@@ -105,6 +105,17 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 40px 80px rgba(15, 23, 42, 0.5);
     box-sizing: border-box;
+}
+
+.business-card_080::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .card-photo-section_080 {
@@ -181,7 +192,7 @@ body {
 
 .loyalty-fill_080 {
     height: 100%;
-    background: linear-gradient(90deg, #22c55e, #4ade80, #bef264);
+    background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
     border-radius: 999px;
     transition: width 0.3s;
 }
