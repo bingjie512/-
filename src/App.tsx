@@ -25,12 +25,12 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 // Utility for tailwind classes
-function cn(...inputs: ClassValue[]) {
+function cn_080(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 // Types
-interface UserProfile {
+interface UserProfile_080 {
   avatar: string;
   name: string;
   email: string;
@@ -44,42 +44,42 @@ interface UserProfile {
   loyalty: number;
 }
 
-interface UserData {
+interface UserData_080 {
   password?: string;
-  profile: UserProfile;
+  profile: UserProfile_080;
 }
 
-interface UsersStore {
-  [key: string]: UserData;
+interface UsersStore_080 {
+  [key: string]: UserData_080;
 }
 
-export default function App() {
-  const [page, setPage] = useState<'landing' | 'login' | 'register' | 'profile-setup' | 'workbench'>('landing');
-  const [users, setUsers] = useState<UsersStore>(() => {
-    const saved = localStorage.getItem('users_080');
-    return saved ? JSON.parse(saved) : {};
+export default function App_080() {
+  const [page_080, setPage_080] = useState<'landing' | 'login' | 'register' | 'profile-setup' | 'workbench'>('landing');
+  const [users_080, setUsers_080] = useState<UsersStore_080>(() => {
+    const saved_080 = localStorage.getItem('users_080');
+    return saved_080 ? JSON.parse(saved_080) : {};
   });
-  const [currentUser, setCurrentUser] = useState<string | null>(() => {
+  const [currentUser_080, setCurrentUser_080] = useState<string | null>(() => {
     return sessionStorage.getItem('loggedInUser_080');
   });
 
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef_080 = useRef<HTMLDivElement>(null);
 
   // Sync users to localStorage
   useEffect(() => {
-    localStorage.setItem('users_080', JSON.stringify(users));
-  }, [users]);
+    localStorage.setItem('users_080', JSON.stringify(users_080));
+  }, [users_080]);
 
   // Handle Login
-  const handleLogin = (studentId: string, pass: string): boolean => {
-    const user = users[studentId];
-    if (user && user.password === pass) {
-      setCurrentUser(studentId);
-      sessionStorage.setItem('loggedInUser_080', studentId);
-      if (user.profile && Object.keys(user.profile).length > 0 && user.profile.name) {
-        setPage('workbench');
+  const handleLogin_080 = (studentId_080: string, pass_080: string): boolean => {
+    const user_080 = users_080[studentId_080];
+    if (user_080 && user_080.password === pass_080) {
+      setCurrentUser_080(studentId_080);
+      sessionStorage.setItem('loggedInUser_080', studentId_080);
+      if (user_080.profile && Object.keys(user_080.profile).length > 0 && user_080.profile.name) {
+        setPage_080('workbench');
       } else {
-        setPage('profile-setup');
+        setPage_080('profile-setup');
       }
       return true;
     }
@@ -87,14 +87,14 @@ export default function App() {
   };
 
   // Handle Register
-  const handleRegister = (studentId: string, pass: string): boolean => {
-    if (users[studentId]) {
+  const handleRegister_080 = (studentId_080: string, pass_080: string): boolean => {
+    if (users_080[studentId_080]) {
       return false;
     }
-    const newUsers: UsersStore = { 
-      ...users, 
-      [studentId]: { 
-        password: pass, 
+    const newUsers_080: UsersStore_080 = { 
+      ...users_080, 
+      [studentId_080]: { 
+        password: pass_080, 
         profile: {
           avatar: '',
           name: '',
@@ -110,57 +110,57 @@ export default function App() {
         } 
       } 
     };
-    setUsers(newUsers);
-    setCurrentUser(studentId);
-    sessionStorage.setItem('loggedInUser_080', studentId);
-    setPage('profile-setup');
+    setUsers_080(newUsers_080);
+    setCurrentUser_080(studentId_080);
+    sessionStorage.setItem('loggedInUser_080', studentId_080);
+    setPage_080('profile-setup');
     return true;
   };
 
   // Handle Logout
-  const handleLogout = () => {
-    setCurrentUser(null);
+  const handleLogout_080 = () => {
+    setCurrentUser_080(null);
     sessionStorage.removeItem('loggedInUser_080');
-    setPage('landing');
+    setPage_080('landing');
   };
 
   // Handle Profile Update
-  const updateProfile = (profile: UserProfile) => {
-    if (!currentUser) return;
-    const newUsers = {
-      ...users,
-      [currentUser]: {
-        ...users[currentUser],
-        profile
+  const updateProfile_080 = (profile_080: UserProfile_080) => {
+    if (!currentUser_080) return;
+    const newUsers_080 = {
+      ...users_080,
+      [currentUser_080]: {
+        ...users_080[currentUser_080],
+        profile: profile_080
       }
     };
-    setUsers(newUsers);
-    setPage('workbench');
+    setUsers_080(newUsers_080);
+    setPage_080('workbench');
   };
 
-  const currentProfile = currentUser ? users[currentUser]?.profile : null;
+  const currentProfile_080 = currentUser_080 ? users_080[currentUser_080]?.profile : null;
 
   return (
     <div className="bg-blobs min-h-screen flex flex-col items-center pt-24 pb-12 px-4">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-xl border-b border-zinc-200 z-50">
         <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-          <a href="#" onClick={() => setPage('landing')} className="text-xl font-bold tracking-tight text-zinc-900 flex items-center gap-2">
+          <a href="#" onClick={() => setPage_080('landing')} className="text-xl font-bold tracking-tight text-zinc-900 flex items-center gap-2">
             <Zap className="w-6 h-6 fill-zinc-900" />
             三杯橘080 Profile Card
           </a>
           <div className="flex items-center gap-6">
-            {currentUser ? (
+            {currentUser_080 ? (
               <>
-                <span className="text-sm text-zinc-500 font-medium">Hi, {users[currentUser]?.profile?.name || currentUser}</span>
-                <button onClick={handleLogout} className="text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors flex items-center gap-1">
+                <span className="text-sm text-zinc-500 font-medium">Hi, {users_080[currentUser_080]?.profile?.name || currentUser_080}</span>
+                <button onClick={handleLogout_080} className="text-sm font-semibold text-zinc-900 hover:text-zinc-600 transition-colors flex items-center gap-1">
                   <LogOut className="w-4 h-4" /> 退出
                 </button>
               </>
             ) : (
               <>
-                <button onClick={() => setPage('login')} className="text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors">登录</button>
-                <button onClick={() => setPage('register')} className="bg-zinc-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-zinc-800 transition-all">开始使用</button>
+                <button onClick={() => setPage_080('login')} className="text-sm font-semibold text-zinc-500 hover:text-zinc-900 transition-colors">登录</button>
+                <button onClick={() => setPage_080('register')} className="bg-zinc-900 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-zinc-800 transition-all">开始使用</button>
               </>
             )}
           </div>
@@ -168,11 +168,11 @@ export default function App() {
       </nav>
 
       <AnimatePresence mode="wait">
-        {page === 'landing' && <LandingPage key="landing" onLogin={() => setPage('login')} onRegister={() => setPage('register')} />}
-        {page === 'login' && <LoginPage key="login" onLogin={handleLogin} onGoRegister={() => setPage('register')} />}
-        {page === 'register' && <RegisterPage key="register" onRegister={handleRegister} onGoLogin={() => setPage('login')} />}
-        {page === 'profile-setup' && <ProfileSetupPage key="setup" initialData={currentProfile} onSave={updateProfile} />}
-        {page === 'workbench' && <WorkbenchPage key="workbench" profile={currentProfile!} onSave={updateProfile} cardRef={cardRef} />}
+        {page_080 === 'landing' && <LandingPage_080 key="landing" onLogin={() => setPage_080('login')} onRegister={() => setPage_080('register')} />}
+        {page_080 === 'login' && <LoginPage_080 key="login" onLogin={handleLogin_080} onGoRegister={() => setPage_080('register')} />}
+        {page_080 === 'register' && <RegisterPage_080 key="register" onRegister={handleRegister_080} onGoLogin={() => setPage_080('login')} />}
+        {page_080 === 'profile-setup' && <ProfileSetupPage_080 key="setup" initialData={currentProfile_080} onSave={updateProfile_080} />}
+        {page_080 === 'workbench' && <WorkbenchPage_080 key="workbench" profile={currentProfile_080!} onSave={updateProfile_080} cardRef={cardRef_080} />}
       </AnimatePresence>
 
       <footer className="mt-12 text-center text-zinc-400 text-xs">
@@ -185,12 +185,12 @@ export default function App() {
 
 // --- Components ---
 
-interface LandingPageProps {
+interface LandingPageProps_080 {
   onLogin: () => void;
   onRegister: () => void;
   key?: string;
 }
-function LandingPage({ onLogin, onRegister }: LandingPageProps) {
+function LandingPage_080({ onLogin, onRegister }: LandingPageProps_080) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -218,11 +218,11 @@ function LandingPage({ onLogin, onRegister }: LandingPageProps) {
           { icon: <ShieldCheck className="w-8 h-8 text-zinc-900" />, title: "安全存储", desc: "本地存储技术，确保你的数据只留在你的设备上。" },
           { icon: <Zap className="w-8 h-8 text-zinc-900" />, title: "瞬间生成", desc: "实时预览，所见即所得，快速导出高清名片图片。" },
           { icon: <Layout className="w-8 h-8 text-zinc-900" />, title: "精美模板", desc: "遵循 Apple 设计规范，提供极致的视觉美感。" }
-        ].map((f, i) => (
-          <div key={i} className="bg-white/60 backdrop-blur-lg border border-zinc-100 p-8 rounded-3xl text-left hover:shadow-2xl hover:shadow-zinc-100 transition-all border-b-4 border-b-zinc-900/5">
-            {f.icon}
-            <h3 className="text-xl font-bold mt-4 mb-2">{f.title}</h3>
-            <p className="text-zinc-500 leading-relaxed">{f.desc}</p>
+        ].map((f_080, i_080) => (
+          <div key={i_080} className="bg-white/60 backdrop-blur-lg border border-zinc-100 p-8 rounded-3xl text-left hover:shadow-2xl hover:shadow-zinc-100 transition-all border-b-4 border-b-zinc-900/5">
+            {f_080.icon}
+            <h3 className="text-xl font-bold mt-4 mb-2">{f_080.title}</h3>
+            <p className="text-zinc-500 leading-relaxed">{f_080.desc}</p>
           </div>
         ))}
       </div>
@@ -230,21 +230,21 @@ function LandingPage({ onLogin, onRegister }: LandingPageProps) {
   );
 }
 
-interface LoginPageProps {
+interface LoginPageProps_080 {
   onLogin: (id: string, pass: string) => boolean;
   onGoRegister: () => void;
   key?: string;
 }
-function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
-  const [id, setId] = useState('');
-  const [pass, setPass] = useState('');
-  const [error, setError] = useState('');
+function LoginPage_080({ onLogin, onGoRegister }: LoginPageProps_080) {
+  const [id_080, setId_080] = useState('');
+  const [pass_080, setPass_080] = useState('');
+  const [error_080, setError_080] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const success = onLogin(id, pass);
-    if (!success) {
-      setError('学号或密码错误，请重试');
+  const handleSubmit_080 = (e_080: React.FormEvent) => {
+    e_080.preventDefault();
+    const success_080 = onLogin(id_080, pass_080);
+    if (!success_080) {
+      setError_080('学号或密码错误，请重试');
     }
   };
 
@@ -259,15 +259,15 @@ function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
         <h2 className="text-4xl font-bold tracking-tight text-zinc-900">欢迎回来</h2>
         <p className="text-lg text-zinc-500 mt-3">请输入你的学号和密码登录</p>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-8">
-        {error && (
+      <form onSubmit={handleSubmit_080} className="space-y-8">
+        {error_080 && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-red-50 border border-red-100 text-red-600 px-5 py-4 rounded-xl text-base font-medium flex items-center gap-2"
           >
             <div className="w-2 h-2 rounded-full bg-red-600" />
-            {error}
+            {error_080}
           </motion.div>
         )}
         <div className="space-y-3">
@@ -277,8 +277,8 @@ function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
           <input 
             type="text" 
             required 
-            value={id}
-            onChange={(e) => { setId(e.target.value); setError(''); }}
+            value={id_080}
+            onChange={(e_080) => { setId_080(e_080.target.value); setError_080(''); }}
             className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all text-lg"
             placeholder="请输入学号"
           />
@@ -290,8 +290,8 @@ function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
           <input 
             type="password" 
             required 
-            value={pass}
-            onChange={(e) => { setPass(e.target.value); setError(''); }}
+            value={pass_080}
+            onChange={(e_080) => { setPass_080(e_080.target.value); setError_080(''); }}
             className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 focus:border-transparent outline-none transition-all text-lg"
             placeholder="请输入密码"
           />
@@ -307,26 +307,26 @@ function LoginPage({ onLogin, onGoRegister }: LoginPageProps) {
   );
 }
 
-interface RegisterPageProps {
+interface RegisterPageProps_080 {
   onRegister: (id: string, pass: string) => boolean;
   onGoLogin: () => void;
   key?: string;
 }
-function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
-  const [id, setId] = useState('');
-  const [pass, setPass] = useState('');
-  const [confirm, setConfirm] = useState('');
-  const [error, setError] = useState('');
+function RegisterPage_080({ onRegister, onGoLogin }: RegisterPageProps_080) {
+  const [id_080, setId_080] = useState('');
+  const [pass_080, setPass_080] = useState('');
+  const [confirm_080, setConfirm_080] = useState('');
+  const [error_080, setError_080] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (pass !== confirm) {
-      setError('两次输入的密码不一致！');
+  const handleSubmit_080 = (e_080: React.FormEvent) => {
+    e_080.preventDefault();
+    if (pass_080 !== confirm_080) {
+      setError_080('两次输入的密码不一致！');
       return;
     }
-    const success = onRegister(id, pass);
-    if (!success) {
-      setError('该学号已被注册！');
+    const success_080 = onRegister(id_080, pass_080);
+    if (!success_080) {
+      setError_080('该学号已被注册！');
     }
   };
 
@@ -341,15 +341,15 @@ function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
         <h2 className="text-3xl font-bold tracking-tight text-zinc-900">创建账号</h2>
         <p className="text-zinc-500 mt-2">开启你的名片设计之旅</p>
       </div>
-      <form onSubmit={handleSubmit} className="space-y-5">
-        {error && (
+      <form onSubmit={handleSubmit_080} className="space-y-5">
+        {error_080 && (
           <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl text-sm font-medium flex items-center gap-2"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-red-600" />
-            {error}
+            {error_080}
           </motion.div>
         )}
         <div className="space-y-2">
@@ -357,8 +357,8 @@ function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
           <input 
             type="text" 
             required 
-            value={id}
-            onChange={(e) => { setId(e.target.value); setError(''); }}
+            value={id_080}
+            onChange={(e_080) => { setId_080(e_080.target.value); setError_080(''); }}
             className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none transition-all"
             placeholder="设置你的学号"
           />
@@ -368,8 +368,8 @@ function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
           <input 
             type="password" 
             required 
-            value={pass}
-            onChange={(e) => { setPass(e.target.value); setError(''); }}
+            value={pass_080}
+            onChange={(e_080) => { setPass_080(e_080.target.value); setError_080(''); }}
             className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none transition-all"
             placeholder="至少6位字符"
           />
@@ -379,8 +379,8 @@ function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
           <input 
             type="password" 
             required 
-            value={confirm}
-            onChange={(e) => { setConfirm(e.target.value); setError(''); }}
+            value={confirm_080}
+            onChange={(e_080) => { setConfirm_080(e_080.target.value); setError_080(''); }}
             className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none transition-all"
             placeholder="再次输入密码"
           />
@@ -396,13 +396,13 @@ function RegisterPage({ onRegister, onGoLogin }: RegisterPageProps) {
   );
 }
 
-interface ProfileSetupPageProps {
-  initialData: UserProfile | null;
-  onSave: (p: UserProfile) => void;
+interface ProfileSetupPageProps_080 {
+  initialData: UserProfile_080 | null;
+  onSave: (p_080: UserProfile_080) => void;
   key?: string;
 }
-function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
-  const [formData, setFormData] = useState<UserProfile>(initialData || {
+function ProfileSetupPage_080({ initialData, onSave }: ProfileSetupPageProps_080) {
+  const [formData_080, setFormData_080] = useState<UserProfile_080>(initialData || {
     avatar: '',
     name: '',
     email: '',
@@ -416,14 +416,14 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
     loyalty: 50
   });
 
-  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        setFormData(prev => ({ ...prev, avatar: ev.target?.result as string }));
+  const handleAvatarChange_080 = (e_080: React.ChangeEvent<HTMLInputElement>) => {
+    const file_080 = e_080.target.files?.[0];
+    if (file_080) {
+      const reader_080 = new FileReader();
+      reader_080.onload = (ev_080) => {
+        setFormData_080(prev_080 => ({ ...prev_080, avatar: ev_080.target?.result as string }));
       };
-      reader.readAsDataURL(file);
+      reader_080.readAsDataURL(file_080);
     }
   };
 
@@ -438,12 +438,12 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
         <h2 className="text-4xl font-bold tracking-tight">完善个人资料</h2>
         <p className="text-xl text-zinc-500 mt-3">这些信息将展示在你的名片上</p>
       </div>
-      <form onSubmit={(e) => { e.preventDefault(); onSave(formData); }} className="space-y-10">
+      <form onSubmit={(e_080) => { e_080.preventDefault(); onSave(formData_080); }} className="space-y-10">
         {/* Avatar Upload */}
         <div className="flex items-center gap-8 p-8 bg-zinc-50 rounded-3xl border border-zinc-100">
           <div className="relative w-32 h-32 bg-zinc-200 rounded-2xl overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
-            {formData.avatar ? (
-              <img src={formData.avatar} alt="Avatar" className="w-full h-full object-cover" />
+            {formData_080.avatar ? (
+              <img src={formData_080.avatar} alt="Avatar" className="w-full h-full object-cover" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-zinc-400">
                 <User className="w-12 h-12" />
@@ -455,7 +455,7 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
             <p className="text-sm text-zinc-400 mb-4">建议上传正方形照片，支持 JPG, PNG 格式</p>
             <label className="inline-block bg-white border border-zinc-200 px-6 py-3 rounded-xl text-base font-semibold cursor-pointer hover:bg-zinc-50 transition-colors">
               选择照片
-              <input type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+              <input type="file" accept="image/*" className="hidden" onChange={handleAvatarChange_080} />
             </label>
           </div>
         </div>
@@ -464,8 +464,8 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
           <div className="space-y-3">
             <label className="text-base font-semibold text-zinc-700">真实姓名</label>
             <input 
-              type="text" required value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              type="text" required value={formData_080.name}
+              onChange={(e_080) => setFormData_080({ ...formData_080, name: e_080.target.value })}
               className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="你的名字"
             />
@@ -473,8 +473,8 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
           <div className="space-y-3">
             <label className="text-base font-semibold text-zinc-700">电子邮箱</label>
             <input 
-              type="email" required value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              type="email" required value={formData_080.email}
+              onChange={(e_080) => setFormData_080({ ...formData_080, email: e_080.target.value })}
               className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="example@mail.com"
             />
@@ -482,16 +482,16 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
           <div className="space-y-3">
             <label className="text-base font-semibold text-zinc-700">年龄</label>
             <input 
-              type="number" required value={formData.age}
-              onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+              type="number" required value={formData_080.age}
+              onChange={(e_080) => setFormData_080({ ...formData_080, age: e_080.target.value })}
               className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
             />
           </div>
           <div className="space-y-3">
             <label className="text-base font-semibold text-zinc-700">班级</label>
             <input 
-              type="text" required value={formData.classGroup}
-              onChange={(e) => setFormData({ ...formData, classGroup: e.target.value })}
+              type="text" required value={formData_080.classGroup}
+              onChange={(e_080) => setFormData_080({ ...formData_080, classGroup: e_080.target.value })}
               className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none text-lg"
               placeholder="如：计算机2201"
             />
@@ -499,14 +499,14 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
           <div className="space-y-3">
             <label className="text-base font-semibold text-zinc-700">性别</label>
             <div className="flex gap-6 py-4">
-              {['男', '女'].map(g => (
-                <label key={g} className="flex items-center gap-3 cursor-pointer">
+              {['男', '女'].map(g_080 => (
+                <label key={g_080} className="flex items-center gap-3 cursor-pointer">
                   <input 
-                    type="radio" name="gender" value={g} checked={formData.gender === g}
-                    onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                    type="radio" name="gender" value={g_080} checked={formData_080.gender === g_080}
+                    onChange={(e_080) => setFormData_080({ ...formData_080, gender: e_080.target.value })}
                     className="w-5 h-5 accent-zinc-900"
                   />
-                  <span className="text-lg font-medium">{g}</span>
+                  <span className="text-lg font-medium">{g_080}</span>
                 </label>
               ))}
             </div>
@@ -516,8 +516,8 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
         <div className="space-y-3">
           <label className="text-base font-semibold text-zinc-700">个性签名</label>
           <textarea 
-            rows={3} value={formData.signature}
-            onChange={(e) => setFormData({ ...formData, signature: e.target.value })}
+            rows={3} value={formData_080.signature}
+            onChange={(e_080) => setFormData_080({ ...formData_080, signature: e_080.target.value })}
             className="w-full px-5 py-4 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none resize-none text-lg"
             placeholder="一句话介绍你自己..."
           />
@@ -531,14 +531,14 @@ function ProfileSetupPage({ initialData, onSave }: ProfileSetupPageProps) {
   );
 }
 
-interface WorkbenchPageProps {
-  profile: UserProfile;
-  onSave: (p: UserProfile) => void;
+interface WorkbenchPageProps_080 {
+  profile: UserProfile_080;
+  onSave: (p_080: UserProfile_080) => void;
   cardRef: React.RefObject<HTMLDivElement | null>;
   key?: string;
 }
-function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
-  const [formData, setFormData] = useState<UserProfile>({
+function WorkbenchPage_080({ profile, onSave, cardRef }: WorkbenchPageProps_080) {
+  const [formData_080, setFormData_080] = useState<UserProfile_080>({
     avatar: profile.avatar || '',
     name: profile.name || '',
     email: profile.email || '',
@@ -552,35 +552,46 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
     loyalty: profile.loyalty ?? 50
   });
 
-  const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloading_080, setIsDownloading_080] = useState(false);
+  const [downloadError_080, setDownloadError_080] = useState<string | null>(null);
 
-  const handleDownload = async () => {
-    if (cardRef.current && !isDownloading) {
-      setIsDownloading(true);
+  const handleDownload_080 = async () => {
+    if (cardRef.current && !isDownloading_080) {
+      setIsDownloading_080(true);
+      setDownloadError_080(null);
       try {
-        const canvas = await html2canvas(cardRef.current, { 
-          useCORS: true, 
+        // Give a small delay to ensure all styles are applied
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        const canvas_080 = await html2canvas(cardRef.current, { 
+          useCORS: true,
+          allowTaint: false,
           scale: 2,
-          backgroundColor: null,
-          logging: false
+          backgroundColor: '#1e293b', // Match the card background
+          logging: true,
+          width: cardRef.current.offsetWidth,
+          height: cardRef.current.offsetHeight
         });
-        const link = document.createElement('a');
-        link.download = `名片_${formData.name || '未命名'}.png`;
-        link.href = canvas.toDataURL('image/png');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } catch (err) {
-        console.error("Download failed:", err);
+        
+        const dataUrl_080 = canvas_080.toDataURL('image/png');
+        const link_080 = document.createElement('a');
+        link_080.href = dataUrl_080;
+        link_080.download = `名片_${formData_080.name || '未命名'}.png`;
+        document.body.appendChild(link_080);
+        link_080.click();
+        document.body.removeChild(link_080);
+      } catch (err_080) {
+        console.error("Download failed:", err_080);
+        setDownloadError_080("生成图片失败，请稍后重试。");
       } finally {
-        setIsDownloading(false);
+        setIsDownloading_080(false);
       }
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { id, value } = e.target;
-    setFormData(prev => ({ ...prev, [id]: value }));
+  const handleInputChange_080 = (e_080: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { id, value } = e_080.target;
+    setFormData_080(prev_080 => ({ ...prev_080, [id]: value }));
   };
 
   return (
@@ -604,70 +615,73 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">姓名</label>
-                  <input id="name" type="text" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
+                  <input id="name" type="text" value={formData_080.name} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">职称</label>
-                  <input id="title" type="text" value={formData.title} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
+                  <input id="title" type="text" value={formData_080.title} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">学历</label>
-                  <select id="education" value={formData.education} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none">
-                    {['专科', '本科', '硕士', '博士'].map(e => <option key={e} value={e}>{e}</option>)}
+                  <select id="education" value={formData_080.education} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none">
+                    {['专科', '本科', '硕士', '博士'].map(e_080 => <option key={e_080} value={e_080}>{e_080}</option>)}
                   </select>
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">年龄</label>
-                  <input id="age" type="number" value={formData.age} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
+                  <input id="age" type="number" value={formData_080.age} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
                 </div>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">班级</label>
-                  <input id="classGroup" type="text" value={formData.classGroup} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
+                  <input id="classGroup" type="text" value={formData_080.classGroup} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" />
                 </div>
               </div>
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">兴趣爱好</label>
-                <input id="hobbies" type="text" value={formData.hobbies} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" placeholder="用逗号分隔，如：摄影, 编程, 旅游" />
+                <input id="hobbies" type="text" value={formData_080.hobbies} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none" placeholder="用逗号分隔，如：摄影, 编程, 旅游" />
               </div>
 
               <div className="space-y-1">
                 <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">个性签名</label>
-                <textarea id="signature" rows={2} value={formData.signature} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none resize-none" />
+                <textarea id="signature" rows={2} value={formData_080.signature} onChange={handleInputChange_080} className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:ring-2 focus:ring-zinc-900 outline-none resize-none" />
               </div>
 
               <div className="space-y-1">
                 <div className="flex justify-between items-center mb-2">
                   <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider">忠诚度 / 活跃度</label>
-                  <span className="text-xs font-bold text-zinc-900">{formData.loyalty}%</span>
+                  <span className="text-xs font-bold text-zinc-900">{formData_080.loyalty}%</span>
                 </div>
                 <input 
-                  id="loyalty" type="range" min="0" max="100" value={formData.loyalty} 
-                  onChange={(e) => setFormData({ ...formData, loyalty: parseInt(e.target.value) })}
+                  id="loyalty" type="range" min="0" max="100" value={formData_080.loyalty} 
+                  onChange={(e_080) => setFormData_080({ ...formData_080, loyalty: parseInt(e_080.target.value) })}
                   className="w-full h-2 bg-zinc-100 rounded-lg appearance-none cursor-pointer accent-zinc-900"
                 />
               </div>
 
               <div className="flex gap-4 pt-4">
                 <button 
-                  type="button" onClick={() => onSave(formData)}
+                  type="button" onClick={() => onSave(formData_080)}
                   className="flex-1 bg-zinc-900 text-white py-4 rounded-2xl font-bold hover:bg-zinc-800 transition-all"
                 >
                   更新档案
                 </button>
                 <button 
-                  type="button" onClick={handleDownload}
-                  disabled={isDownloading}
+                  type="button" onClick={handleDownload_080}
+                  disabled={isDownloading_080}
                   className="flex-1 bg-white border border-zinc-200 text-zinc-900 py-4 rounded-2xl font-bold hover:bg-zinc-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  {isDownloading ? (
+                  {isDownloading_080 ? (
                     <div className="w-5 h-5 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
                   ) : (
                     <Download className="w-5 h-5" />
                   )}
-                  {isDownloading ? '生成中...' : '下载名片'}
+                  {isDownloading_080 ? '生成中...' : '下载名片'}
                 </button>
               </div>
+              {downloadError_080 && (
+                <p className="text-red-500 text-xs mt-2 text-center font-medium">{downloadError_080}</p>
+              )}
             </form>
           </div>
         </div>
@@ -684,52 +698,54 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
           <div ref={cardRef} className="business-card_080">
             <div className="card-photo-section_080">
               <img 
-                src={formData.avatar || 'https://picsum.photos/seed/avatar/400/500'} 
+                src={formData_080.avatar || 'https://picsum.photos/seed/avatar/400/500'} 
                 alt="Avatar" 
                 className="card-avatar_080"
+                crossOrigin="anonymous"
+                referrerPolicy="no-referrer"
               />
             </div>
             <div className="card-info-section_080">
               <div>
-                <h2 className="text-4xl font-black text-white tracking-tight leading-tight mb-1">{formData.name || '您的姓名'}</h2>
-                <p className="text-lg text-emerald-400 font-bold tracking-[0.2em] uppercase">{formData.title || '学生'}</p>
+                <h2 className="text-4xl font-black text-white tracking-tight leading-tight mb-1">{formData_080.name || '您的姓名'}</h2>
+                <p className="text-lg text-emerald-400 font-bold tracking-[0.2em] uppercase">{formData_080.title || '学生'}</p>
               </div>
 
               <div className="info-grid_080">
                 <div className="info-item_080">
                   <span className="info-label_080">年龄 / AGE</span>
-                  <span className="info-value_080">{formData.age || 'N/A'}</span>
+                  <span className="info-value_080">{formData_080.age || 'N/A'}</span>
                 </div>
                 <div className="info-item_080">
                   <span className="info-label_080">性别 / GENDER</span>
-                  <span className="info-value_080">{formData.gender}</span>
+                  <span className="info-value_080">{formData_080.gender}</span>
                 </div>
                 <div className="info-item_080">
                   <span className="info-label_080">班级 / CLASS</span>
-                  <span className="info-value_080">{formData.classGroup || '未填写'}</span>
+                  <span className="info-value_080">{formData_080.classGroup || '未填写'}</span>
                 </div>
                 <div className="info-item_080">
                   <span className="info-label_080">学历 / EDUCATION</span>
-                  <span className="info-value_080">{formData.education}</span>
+                  <span className="info-value_080">{formData_080.education}</span>
                 </div>
                 <div className="info-item_080">
                   <span className="info-label_080">爱好 / HOBBIES</span>
-                  <span className="info-value_080">{formData.hobbies || '无'}</span>
+                  <span className="info-value_080">{formData_080.hobbies || '无'}</span>
                 </div>
                 <div className="info-item_080">
                   <span className="info-label_080">邮箱 / EMAIL</span>
-                  <span className="info-value_080">{formData.email || 'example@mail.com'}</span>
+                  <span className="info-value_080">{formData_080.email || 'example@mail.com'}</span>
                 </div>
               </div>
 
               <div className="card-footer_080 mt-4">
-                <p className="text-sm text-zinc-400 italic mb-4">"{formData.signature || '这个人很酷，什么都没留下...'}"</p>
+                <p className="text-sm text-zinc-400 italic mb-4">"{formData_080.signature || '这个人很酷，什么都没留下...'}"</p>
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Loyalty Level</span>
-                  <span className="text-[10px] font-bold text-zinc-300">{formData.loyalty}%</span>
+                  <span className="text-[10px] font-bold text-zinc-300">{formData_080.loyalty}%</span>
                 </div>
                 <div className="loyalty-bar_080">
-                  <div className="loyalty-fill_080" style={{ width: `${formData.loyalty}%` }} />
+                  <div className="loyalty-fill_080" style={{ width: `${formData_080.loyalty}%` }} />
                 </div>
               </div>
             </div>
