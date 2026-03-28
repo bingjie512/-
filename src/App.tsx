@@ -168,7 +168,7 @@ export default function App() {
       </nav>
 
       <AnimatePresence mode="wait">
-        {page === 'landing' && <LandingPage key="landing" onStart={() => setPage('register')} />}
+        {page === 'landing' && <LandingPage key="landing" onLogin={() => setPage('login')} onRegister={() => setPage('register')} />}
         {page === 'login' && <LoginPage key="login" onLogin={handleLogin} onGoRegister={() => setPage('register')} />}
         {page === 'register' && <RegisterPage key="register" onRegister={handleRegister} onGoLogin={() => setPage('login')} />}
         {page === 'profile-setup' && <ProfileSetupPage key="setup" initialData={currentProfile} onSave={updateProfile} />}
@@ -186,10 +186,11 @@ export default function App() {
 // --- Components ---
 
 interface LandingPageProps {
-  onStart: () => void;
+  onLogin: () => void;
+  onRegister: () => void;
   key?: string;
 }
-function LandingPage({ onStart }: LandingPageProps) {
+function LandingPage({ onLogin, onRegister }: LandingPageProps) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
@@ -204,11 +205,11 @@ function LandingPage({ onStart }: LandingPageProps) {
         极简设计，极致体验。只需几秒钟，即可生成一张极具设计感的个人数字名片，随时随地分享你的专业形象。
       </p>
       <div className="flex flex-col sm:flex-row justify-center gap-4">
-        <button onClick={onStart} className="bg-zinc-900 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-zinc-200">
-          立即开始 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+        <button onClick={onLogin} className="bg-zinc-900 text-white px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-800 transition-all flex items-center justify-center gap-2 group shadow-xl shadow-zinc-200">
+          登录 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
         </button>
-        <button className="bg-white text-zinc-900 border border-zinc-200 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-50 transition-all">
-          了解更多
+        <button onClick={onRegister} className="bg-white text-zinc-900 border border-zinc-200 px-8 py-4 rounded-2xl text-lg font-semibold hover:bg-zinc-50 transition-all">
+          注册
         </button>
       </div>
 
