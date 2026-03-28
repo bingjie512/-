@@ -552,17 +552,29 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
     loyalty: profile.loyalty ?? 50
   });
 
+  const [isDownloading, setIsDownloading] = useState(false);
+
   const handleDownload = async () => {
-    if (cardRef.current) {
-      const canvas = await html2canvas(cardRef.current, { 
-        useCORS: true, 
-        scale: 3,
-        backgroundColor: null
-      });
-      const link = document.createElement('a');
-      link.download = `名片_${formData.name}.png`;
-      link.href = canvas.toDataURL('image/png');
-      link.click();
+    if (cardRef.current && !isDownloading) {
+      setIsDownloading(true);
+      try {
+        const canvas = await html2canvas(cardRef.current, { 
+          useCORS: true, 
+          scale: 2,
+          backgroundColor: null,
+          logging: false
+        });
+        const link = document.createElement('a');
+        link.download = `名片_${formData.name || '未命名'}.png`;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (err) {
+        console.error("Download failed:", err);
+      } finally {
+        setIsDownloading(false);
+      }
     }
   };
 
@@ -645,9 +657,15 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
                 </button>
                 <button 
                   type="button" onClick={handleDownload}
-                  className="flex-1 bg-white border border-zinc-200 text-zinc-900 py-4 rounded-2xl font-bold hover:bg-zinc-50 transition-all flex items-center justify-center gap-2"
+                  disabled={isDownloading}
+                  className="flex-1 bg-white border border-zinc-200 text-zinc-900 py-4 rounded-2xl font-bold hover:bg-zinc-50 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  <Download className="w-5 h-5" /> 下载名片
+                  {isDownloading ? (
+                    <div className="w-5 h-5 border-2 border-zinc-900 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Download className="w-5 h-5" />
+                  )}
+                  {isDownloading ? '生成中...' : '下载名片'}
                 </button>
               </div>
             </form>
@@ -672,45 +690,43 @@ function WorkbenchPage({ profile, onSave, cardRef }: WorkbenchPageProps) {
               />
             </div>
             <div className="card-info-section_080">
-            <div className="space-y-10">
-                <div>
-                  <h2 className="text-6xl font-bold text-white tracking-tight leading-tight">{formData.name || '姓名'}</h2>
-                  <p className="text-2xl text-zinc-400 font-medium tracking-widest uppercase mt-3">{formData.title || '职称'}</p>
-                </div>
+              <div>
+                <h2 className="text-4xl font-black text-white tracking-tight leading-tight mb-1">{formData.name || '您的姓名'}</h2>
+                <p className="text-lg text-emerald-400 font-bold tracking-[0.2em] uppercase">{formData.title || '学生'}</p>
+              </div>
 
-                <div className="info-grid_080">
-                  <div className="info-item_080">
-                    <span className="info-label_080">年龄 / AGE</span>
-                    <span className="info-value_080">{formData.age || 'N/A'}</span>
-                  </div>
-                  <div className="info-item_080">
-                    <span className="info-label_080">性别 / GENDER</span>
-                    <span className="info-value_080">{formData.gender}</span>
-                  </div>
-                  <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">班级 / CLASS</span>
-                    <span className="info-value_080">{formData.classGroup || '未填写'}</span>
-                  </div>
-                  <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">学历 / EDUCATION</span>
-                    <span className="info-value_080">{formData.education}</span>
-                  </div>
-                  <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">爱好 / HOBBIES</span>
-                    <span className="info-value_080">{formData.hobbies || '无'}</span>
-                  </div>
-                  <div className="info-item_080 info-item-full-width_080">
-                    <span className="info-label_080">邮箱 / EMAIL</span>
-                    <span className="info-value_080 text-zinc-100">{formData.email || 'example@mail.com'}</span>
-                  </div>
+              <div className="info-grid_080">
+                <div className="info-item_080">
+                  <span className="info-label_080">年龄 / AGE</span>
+                  <span className="info-value_080">{formData.age || 'N/A'}</span>
+                </div>
+                <div className="info-item_080">
+                  <span className="info-label_080">性别 / GENDER</span>
+                  <span className="info-value_080">{formData.gender}</span>
+                </div>
+                <div className="info-item_080">
+                  <span className="info-label_080">班级 / CLASS</span>
+                  <span className="info-value_080">{formData.classGroup || '未填写'}</span>
+                </div>
+                <div className="info-item_080">
+                  <span className="info-label_080">学历 / EDUCATION</span>
+                  <span className="info-value_080">{formData.education}</span>
+                </div>
+                <div className="info-item_080">
+                  <span className="info-label_080">爱好 / HOBBIES</span>
+                  <span className="info-value_080">{formData.hobbies || '无'}</span>
+                </div>
+                <div className="info-item_080">
+                  <span className="info-label_080">邮箱 / EMAIL</span>
+                  <span className="info-value_080">{formData.email || 'example@mail.com'}</span>
                 </div>
               </div>
 
-              <div className="card-footer_080 mt-12">
-                <p className="text-2xl text-zinc-400 italic mb-8 leading-relaxed">"{formData.signature || '这个人很酷，什么都没留下...'}"</p>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Loyalty Level</span>
-                  <span className="text-sm font-bold text-zinc-300">{formData.loyalty}%</span>
+              <div className="card-footer_080 mt-4">
+                <p className="text-sm text-zinc-400 italic mb-4">"{formData.signature || '这个人很酷，什么都没留下...'}"</p>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Loyalty Level</span>
+                  <span className="text-[10px] font-bold text-zinc-300">{formData.loyalty}%</span>
                 </div>
                 <div className="loyalty-bar_080">
                   <div className="loyalty-fill_080" style={{ width: `${formData.loyalty}%` }} />
